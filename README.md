@@ -1,3 +1,4 @@
+# Nindia Nur Artika I.2510256
 # JavaPersistence - Employee Management Application
 
 Aplikasi desktop CRUD (Create, Read, Update, Delete) untuk manajemen data karyawan menggunakan **Java 21 LTS**, **Hibernate ORM**, dan **MySQL Database**.
@@ -145,6 +146,5 @@ JavaPersistence/
 
 **Status:** Educational/Learning Purpose (tidak untuk production)
 
----
+<img width="984" height="640" alt="image" src="https://github.com/user-attachments/assets/84109ed2-4264-47a1-bede-5bb1b11b8548" />
 
-**Happy Coding! 🚀**
