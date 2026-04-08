@@ -3,147 +3,77 @@
 
 Aplikasi desktop CRUD (Create, Read, Update, Delete) untuk manajemen data karyawan menggunakan **Java 21 LTS**, **Hibernate ORM**, dan **MySQL Database**.
 
-## 🔧 Prerequisites
+---
 
-Sebelum menjalankan aplikasi, pastikan sudah install:
+# Employee Management App (Java Persistence)
 
-| Komponen | Versi | 
-|----------|-------|
-| Java JDK | 21 LTS |
-| Maven | 3.9.x |
-| MySQL Server | 8.0+ |
+Aplikasi CRUD Desktop berbasis **Java 21**, **Hibernate ORM**, dan **MySQL** untuk manajemen data karyawan.
 
-```bash
-# Verifikasi instalasi
-java -version
-mvn -version
-mysql --version
-
-# Start MySQL (Linux)
-sudo systemctl start mysql
-```
+## 🛠️ Persyaratan Sistem
+* **Java JDK 21**
+* **Maven 3.9.x**
+* **MySQL Server 8.0+**
 
 ---
 
-## 📊 Database Setup
+## 🗄️ Database Quick Start
 
-### 1. Login ke MySQL
-```bash
-mysql -u root -p
-```
-
-### 2. Create Database & Table
-```sql
-CREATE DATABASE IF NOT EXISTS latihan;
-USE latihan;
-
-CREATE TABLE karyawan (
-    nip VARCHAR(10) PRIMARY KEY,
-    nm_kar VARCHAR(100) NOT NULL,
-    tem_lhr VARCHAR(50) NOT NULL,
-    tgl_lhr DATE NOT NULL,
-    jabatan VARCHAR(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
-INSERT INTO karyawan VALUES
-('K001', 'Budi Santoso', 'Jakarta', '1990-05-15', 'Manager'),
-('K002', 'Siti Rahayu', 'Bandung', '1992-08-22', 'Staff IT'),
-('K003', 'Ahmad Wijaya', 'Surabaya', '1988-03-10', 'Staff HRD');
-```
-
-**Atau gunakan script siap pakai:**
-```bash
-mysql -u root -p latihan < setup-database.sql
-```
+1.  **Buat Database:**
+    ```sql
+    CREATE DATABASE latihan;
+    USE latihan;
+    ```
+2.  **Struktur Tabel:**
+    ```sql
+    CREATE TABLE karyawan (
+        nip VARCHAR(10) PRIMARY KEY,
+        nm_kar VARCHAR(100) NOT NULL,
+        tem_lhr VARCHAR(50) NOT NULL,
+        tgl_lhr DATE NOT NULL,
+        jabatan VARCHAR(50) NOT NULL
+    );
+    ```
 
 ---
 
-## ⚙️ Configuration
-
-Edit file: `src/main/resources/META-INF/persistence.xml`
+## ⚙️ Konfigurasi
+Sesuaikan kredensial database pada file:  
+`src/main/resources/META-INF/persistence.xml`
 
 ```xml
-<property name="jakarta.persistence.jdbc.url" 
-          value="jdbc:mysql://localhost:3306/latihan"/>
+<property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/latihan"/>
 <property name="jakarta.persistence.jdbc.user" value="root"/>
-<property name="jakarta.persistence.jdbc.password" value="YOUR_PASSWORD"/>
-<property name="jakarta.persistence.jdbc.driver" 
-          value="com.mysql.cj.jdbc.Driver"/>
+<property name="jakarta.persistence.jdbc.password" value="PASSWORD_ANDA"/>
 ```
-
-⚠️ **Ganti `YOUR_PASSWORD` dengan password MySQL Anda!**
 
 ---
 
-## 🚀 How to Run
+## 🚀 Cara Menjalankan
 
+Gunakan perintah terminal berikut:
 ```bash
-# Build & Compile
+# Build proyek
 mvn clean compile
 
-# Run Application
+# Jalankan aplikasi
 mvn exec:java
 ```
 
-Aplikasi akan launch dengan GUI window.
+---
+
+## 📂 Struktur Proyek Singkat
+* `Karyawan.java`: Model Entity.
+* `ControllerKaryawan.java`: Logika akses data (DAO).
+* `FormKaryawan.java`: Antarmuka GUI.
+* `persistence.xml`: Konfigurasi Hibernate.
 
 ---
 
-## 📱 Features & Usage
-
-| Operasi | Langkah |
-|---------|---------|
-| **CREATE** | Isi form → Click ➕ INSERT |
-| **READ** | Auto-load saat start, double-click tabel untuk load ke form |
-| **SEARCH** | Ketik NIP → Press ENTER |
-| **UPDATE** | Load data → Edit field → Click ✏️ UPDATE |
-| **DELETE** | Load data → Click 🗑️ DELETE → Confirm |
-| **REFRESH** | Click 🔄 REFRESH untuk reload semua data |
-| **CLEAR** | Click ❌ CLEAR untuk clear form |
-
----
-
-## 📁 Project Structure
-
-```
-JavaPersistence/
-├── src/main/java/javapersistence/
-│   ├── Main.java                 # Entry point
-│   ├── FormKaryawan.java         # UI Form & Table
-│   ├── ControllerKaryawan.java   # Database Access
-│   └── Karyawan.java             # Entity Model
-├── src/main/resources/META-INF/
-│   └── persistence.xml           # Hibernate Config
-├── src/test/java/javapersistence/
-│   └── AppTest.java              # Unit Tests
-├── pom.xml                       # Maven Dependencies
-└── setup-database.sql            # Database Script
-```
-
----
-
-## 🐛 Troubleshooting
-
-| Error | Solusi |
-|-------|--------|
-| "Communications link failure" | `sudo systemctl start mysql` |
-| "Unknown database 'latihan'" | Jalankan SQL script dari bagian Database Setup |
-| "Data tidak ditemukan" | Pastikan data sudah ada di database |
-| "Duplicate entry for PRIMARY KEY" | Gunakan NIP yang unik |
-| "Form validation failed" | Pastikan semua field (*) terisi |
-| "Cannot locate persistence units" | `mvn clean compile` |
-
-**Untuk bantuan lengkap:** lihat [FIX-INSERT-ERROR.md](FIX-INSERT-ERROR.md)
-
----
-
-## 📝 Notes
-
-- ✅ **Zero compiler warnings** - Clean build
-- ✅ **All tests passing** - 100% test pass rate  
-- ✅ **Modern UI** - Professional design dengan JSplitPane & status bar
-- ✅ **Proper error handling** - User-friendly dialogs & console logging
-
+## 💡 Fitur Utama
+* **CRUD Lengkap:** Tambah, Lihat, Ubah, dan Hapus data.
+* **Pencarian:** Cari data berdasarkan NIP.
+* **Validasi:** Penanganan error input dan duplikasi data.
+* **UI Modern:** Menggunakan JSplitPane untuk layout yang rapi.
 ---
 
 <img width="984" height="640" alt="image" src="https://github.com/user-attachments/assets/84109ed2-4264-47a1-bede-5bb1b11b8548" />
